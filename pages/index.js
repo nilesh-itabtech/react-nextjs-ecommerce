@@ -1,10 +1,12 @@
 import allProducts from './data/products.json';
 import Head from 'next/head';
 import Link from 'next/link';
+import { useCart } from "@/context/CartContext";
 
 import styles from '../styles/Home.module.css';
 
 export default function Home() {
+	const { addToCart } = useCart();
 	return (
 		<>
 			<Head>
@@ -26,7 +28,11 @@ export default function Home() {
 								<div className={styles.product_content}>
 									<h3>{product.name}</h3>
 									<p>${product.price}</p>
-									<button className="btn">Add to cart 🛒</button>
+									<button
+									className="btn snipcart-add-item"
+									 onClick={() => addToCart(product)}>
+										Add to cart 🛒
+									</button>
 								</div>
 							</div>
 						);

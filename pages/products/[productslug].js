@@ -2,16 +2,15 @@ import Head from 'next/head';
 import { useRouter } from "next/router";
 import styles from '../../styles/SingleProduct.module.css';
 import allProducts from '../data/products.json';
+import { useCart } from "@/context/CartContext";
 
 const singleproduct = () => {
+  const { addToCart } = useCart();
   const router = useRouter();
   const { productslug } = router.query;
   console.log("ddd",productslug);
   // find product by id
-    const product = allProducts.find(
-       (item) => item.slug == productslug
-    );
-  console.log(product);
+  const product = allProducts.find((item) => item.slug == productslug);
 
   if (!product) {
     return (
@@ -45,7 +44,7 @@ const singleproduct = () => {
                                 explicabo facere laboriosam eius.
                             </p>
                         </div>
-                        <button className="btn">Add to cart 🛒</button>
+                        <button className="btn" onClick={() => addToCart(product)}>Add to cart 🛒</button>
                     </div>
                 </div>
             </>
